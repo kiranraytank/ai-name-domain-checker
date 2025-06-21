@@ -1,13 +1,13 @@
-# name_generator.py
 import os
 import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-
 API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 def generate_startup_names(keywords, count=5):
+
+    print("Loaded API KEY:", API_KEY)   # Debug purpose
     prompt = f"""Suggest {count} creative and brandable company names based on the following business idea or keywords: "{keywords}".
 Return names in a plain list without numbers or quotes."""
 
@@ -18,7 +18,7 @@ Return names in a plain list without numbers or quotes."""
     }
 
     data = {
-        "model": "mistralai/mixtral-8x7b-instruct",  # OR try openchat, mistral, etc.
+        "model": "mistralai/mixtral-8x7b-instruct",
         "messages": [
             {"role": "system", "content": "You are a branding expert."},
             {"role": "user", "content": prompt}

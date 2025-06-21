@@ -1,21 +1,23 @@
-# domain_checker.py
-import os
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
+def check_domain_availability(name):
+    extensions = ['.com', '.in', '.net', '.ai', '.co']
+    results = {}
 
-DOMAINR_CLIENT_ID = os.getenv("DOMAINR_CLIENT_ID")
+    for ext in extensions:
+        domain = f"{name.lower()}{ext}"
+        url = f"https://api.domainsdb.info/v1/domains/search?domain={domain}"
 
-def check_domain_availability(domain):
-    url = f"https://api.domainr.com/v2/status?mashape-key={DOMAINR_CLIENT_ID}&domain={domain}"
-    headers = {"Accept": "application/json"}
+        try:
+            res = requests.get(url)
+            data = res.json()
 
-    response = requests.get(url, headers=headers)
+            if 'domains' in data and any(d['domain'] == domain for d in data['domains']):
+                results[domain] = "❌ Taken"
+            else:
+                results[domain] = "✅ Available"
 
-    if response.status_code == 200:
-        results = response.json().get("status", [])
-        for item in results:
-            if item["domain"] == domain:
-                return "✅ Available" if "active" not in item["status"] else "❌ Taken"
-    return "⚠️ Error checking domain"
+        except Exception as e:
+            results[domain] = f"⚠️ Error: {e}"
+
+    return results
