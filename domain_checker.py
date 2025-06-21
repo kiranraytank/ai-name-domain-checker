@@ -1,3 +1,5 @@
+# domain_checker.py
+
 import requests
 
 def check_domain_availability(name):
@@ -9,15 +11,19 @@ def check_domain_availability(name):
         url = f"https://api.domainsdb.info/v1/domains/search?domain={domain}"
 
         try:
-            res = requests.get(url)
-            data = res.json()
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
 
-            if 'domains' in data and any(d['domain'] == domain for d in data['domains']):
+            data = response.json()
+
+            if 'domains' in data and any(d.get('domain') == domain for d in data['domains']):
                 results[domain] = "❌ Taken"
             else:
                 results[domain] = "✅ Available"
 
+        except requests.exceptions.RequestException as e:
+            results[domain] = f"⚠️ API Error"
         except Exception as e:
-            results[domain] = f"⚠️ Error: {e}"
+            results[domain] = "⚠️ Unknown Error"
 
     return results
