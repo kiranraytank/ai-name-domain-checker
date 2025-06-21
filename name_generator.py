@@ -1,5 +1,3 @@
-# name_generator.py
-
 import os
 import requests
 from dotenv import load_dotenv
@@ -13,7 +11,7 @@ Return names in a plain list without numbers or quotes."""
 
     headers = {
         "Authorization": f"Bearer {API_KEY}",
-        "HTTP-Referer": "http://localhost",  # Not mandatory on Render
+        "HTTP-Referer": "http://localhost",  # Optional
         "Content-Type": "application/json"
     }
 
@@ -27,6 +25,9 @@ Return names in a plain list without numbers or quotes."""
 
     try:
         response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=data)
-        response.raise_for_status()  # raises error if status != 200
-
-        content = respon
+        response.raise_for_status()
+        content = response.json()
+        return content
+    except Exception as e:
+        print("Error occurred:", e)
+        return {}
