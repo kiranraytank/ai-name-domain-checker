@@ -4,3 +4,4 @@ uploads/
 .env
 .vscode/
 .DS_Store
+credentials.json
