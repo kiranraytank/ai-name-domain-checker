@@ -33,6 +33,7 @@ Follow the steps below to run this project on your local machine:
 git clone https://github.com/your-username/ai-name-domain-checker.git
 cd ai-name-domain-checker
 
+Usefull command : pip freeze > requirements.txt
 
 ---
 
