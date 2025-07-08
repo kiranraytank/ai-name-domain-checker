@@ -156,6 +156,7 @@ def process_generation():
 
 st.button("🔍 Generate + Check Domain", on_click=process_generation, disabled=st.session_state.button_disabled)
 
+
 # --- Output Section ---
 if st.session_state.generated_names:
     st.success("✅ AI Suggested Names with Domain Status:")
@@ -245,13 +246,29 @@ if st.session_state.generated_names:
             </a>
         """, unsafe_allow_html=True)
 
+
 # --- Footer ---
-st.markdown("""
-<hr style='margin-top: 40px; margin-bottom: 10px;'>
-<p style='font-size:14px; text-align: center; color: grey;'>
-🚀 Made with ❤️ by <strong>Raytik</strong> |
-<a href="https://www.linkedin.com/in/kiran-tank/" target="_blank">LinkedIn</a> |
-<a href="https://kirantank.my.canva.site/" target="_blank">Portfolio</a> |
-<a href="https://www.fiverr.com/s/EgN2x2K" target="_blank">Fiverr</a>
+from datetime import datetime
+year = datetime.now().year
+
+st.markdown(f"""
+<hr style='margin-top: 50px; margin-bottom: 10px;'>
+
+<div style='text-align: center; font-size:14px; color: #999;'>
+
+<p style='margin-bottom: 6px;'>
+🚀 Made with <span style='color: #e25555;'>&#10084;&#65039;</span> by <strong>Raytik</strong>
 </p>
+
+<p style='margin: 4px 0;'>
+<a href="https://www.linkedin.com/in/kiran-tank/" target="_blank" style='color: inherit; text-decoration: none; margin: 0 8px;'>🔗 LinkedIn</a> |
+<a href="https://kirantank.my.canva.site/" target="_blank" style='color: inherit; text-decoration: none; margin: 0 8px;'>🌐 Portfolio</a> |
+<a href="https://www.fiverr.com/s/EgN2x2K" target="_blank" style='color: inherit; text-decoration: none; margin: 0 8px;'>🛠 Fiverr</a>
+</p>
+
+<p style='margin-top: 6px; font-size:13px;'>
+© {year} Raytik. All rights reserved.
+</p>
+
+</div>
 """, unsafe_allow_html=True)
