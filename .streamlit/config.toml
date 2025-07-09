@@ -1,8 +1,7 @@
 [server]
+port = $PORT
 enableCORS = false
 enableXsrfProtection = false
-
-
 
 [theme]
 base = "light"
